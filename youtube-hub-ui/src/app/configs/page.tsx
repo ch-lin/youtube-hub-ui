@@ -54,6 +54,8 @@ type HubConfig = {
   cronTimeZone?: string;
   quota?: number;
   quotaSafetyThreshold?: number;
+  apiCallDelay?: number;
+  activeVideosSyncDays?: number;
 };
 
 const DOWNLOADER_API_URL = "/api";
@@ -426,7 +428,9 @@ export default function ConfigsPage() {
       cronExpression: '0 0 9,15,21 * * *',
       cronTimeZone: 'Asia/Taipei',
       quota: 10000,
-      quotaSafetyThreshold: 500
+      quotaSafetyThreshold: 500,
+      apiCallDelay: 100,
+      activeVideosSyncDays: 30
     });
     setHubSaveStatus(null);
   };
@@ -1028,6 +1032,30 @@ export default function ConfigsPage() {
                         type="number"
                         name="quotaSafetyThreshold"
                         value={hubConfigDetails.quotaSafetyThreshold || ''}
+                        onChange={handleHubDetailChange}
+                        className="w-full font-mono bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-3 py-4 text-sm font-medium text-gray-900 dark:text-gray-100">API Call Delay (ms)</td>
+                    <td className="px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                      <input
+                        type="number"
+                        name="apiCallDelay"
+                        value={hubConfigDetails.apiCallDelay || ''}
+                        onChange={handleHubDetailChange}
+                        className="w-full font-mono bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-3 py-4 text-sm font-medium text-gray-900 dark:text-gray-100">Active Videos Sync (Days)</td>
+                    <td className="px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                      <input
+                        type="number"
+                        name="activeVideosSyncDays"
+                        value={hubConfigDetails.activeVideosSyncDays || ''}
                         onChange={handleHubDetailChange}
                         className="w-full font-mono bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2"
                       />
